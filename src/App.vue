@@ -9,8 +9,8 @@
           :list="list"
           :isSingle="true"
           :selectedList="singleSelectedList"
-          @inputChange="inputChangeFn"
-          @selectedValues="val => selectedValeChangedFn(val,true)"
+          @inputChanged="inputChangeFn"
+          @toggleItem="val => selectedValeChangedFn(val,true)"
         />
         <span>Selected Values :</span>
         <br />
@@ -25,8 +25,8 @@
           :list="list"
           :isSingle="false"
           :selectedList="multiSelectedList"
-          @inputChange="inputChangeFn"
-          @selectedValues="val=> selectedValeChangedFn(val, false)"
+          @inputChanged="inputChangeFn"
+          @toggleItem="val=> selectedValeChangedFn(val, false)"
         />
         <span>Selected Values :</span>
         <template v-for="(val, index) in multiSelectedList">

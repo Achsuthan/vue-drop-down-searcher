@@ -100,7 +100,7 @@ export default {
       this.val = val;
     },
     value(val) {
-      this.$emit("inputChange", val.toUpperCase());
+      this.$emit("inputChanged", val.toUpperCase());
     }
   },
   methods: {
@@ -116,7 +116,7 @@ export default {
     reveItemFn(index) {
       let tmpArray = this.internalSelectedList.filter((item, i) => i !== index);
       this.internalSelectedList = tmpArray;
-      this.$emit("selectedValues", tmpArray)
+      this.$emit("toggleItem", tmpArray)
     },
     dropDownSelectedItemFn(item) {
       // console.log("dropDownSelectedItemFn called", item);
@@ -132,7 +132,7 @@ export default {
         this.internalSelectedList = totalSelectedItem;
       }
       this.value = "";
-      this.$emit("selectedValues", totalSelectedItem)
+      this.$emit("toggleItem", totalSelectedItem)
     },
     selectedClassnameFn(item) {
       let found = false;
