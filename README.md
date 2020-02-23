@@ -17,7 +17,7 @@ npm i vue-drop-down-searcher
 
 ### Website
 
-[Demo](https://npmplugins.firebaseapp.com)
+[Demo](https://vue-dropdown-searcher.firebaseapp.com)
 <br/>
 [Npm Link](https://www.npmjs.com/package/vue-drop-down-searcher)
 
