@@ -3,6 +3,7 @@
 Customisable dropdown select for Vue
 
 <img src="https://badge.fury.io/js/vue-drop-down-searcher.svg" alt="version badge">
+[![Build Status](https://travis-ci.org/achsuthan/vue-drop-down-searcher.png?branch=master)](https://travis-ci.org/achsuthan/vue-drop-down-searcher)
 
 
 [![NPM](https://nodei.co/npm/vue-drop-down-searcher.png?mini=true)](https://nodei.co/npm/vue-drop-down-searcher/)
