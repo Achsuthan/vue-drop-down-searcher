@@ -2,6 +2,13 @@
 
 Customisable dropdown select for Vue
 
+### &#x1F53A; Whats New
+
+- Search porps added 
+- Search filter added 
+- InputChanged Call back pros uppercase removed
+- Outside click event to dismiss the dropdown added
+
 ### Features
 
 - Configurable via props
@@ -43,6 +50,7 @@ Component Props
 | ----------------- | ----------- | ------- | ---------------------------------------------------------------------------------------------------- |
 | list              | ArrayObject | []      | These array values will show in the dropdown                                                         |
 | placeholder       | String      | Search  | Input field placeholder                                                                              |
+| searchKey       | String      | Empty  | Search Key for filter 
 | isSingle          | bool        | false   | if true, only one value can be selected from dropdown otherwise multi value can be selected dropdown |
 | labelName         | String      | title   | This value used to show which value is from the object in dropdown                                   |
 | selectedlabelName | String      | title   | From which value from the object need to show in the taginput                                        |
