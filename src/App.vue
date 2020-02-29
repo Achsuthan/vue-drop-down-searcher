@@ -4,28 +4,36 @@
     <div class="row">
       <div class="col-12">
         <span>Single Select :</span>
+        <br />
+        <span>Search Key: {{singleSearchKey}}</span>
+        <br/>
         <VueDropDown
           class="col-12"
           :list="list"
           :isSingle="true"
           :selectedList="singleSelectedList"
-          @inputChanged="inputChangeFn"
+          :searchKey="singleSearchKey"
+          @inputChanged="inputChangeSingleFn"
           @toggleItem="val => selectedValeChangedFn(val,true)"
         />
         <span>Selected Values :</span>
         <br />
-        <span>{{singleSelectedList.length > 0 ? '1 : ' : ''}}  {{singleSelectedList.length > 0 ? singleSelectedList[0].name : ''}}</span>
-        <br />
+        <span>{{singleSelectedList.length > 0 ? '1 : ' : ''}} {{singleSelectedList.length > 0 ? singleSelectedList[0].name : ''}}</span>
+        
         <br />
         <br />
 
         <span>Multi Select :</span>
+        <br/>
+        <span>Search Key: {{multiSearchKey}}</span>
+        <br/>
         <VueDropDown
           class="col-12"
           :list="list"
           :isSingle="false"
           :selectedList="multiSelectedList"
-          @inputChanged="inputChangeFn"
+          @inputChanged="inputChangeMultiFn"
+          :searchKey="multiSearchKey"
           @toggleItem="val=> selectedValeChangedFn(val, false)"
         />
         <span>Selected Values :</span>
@@ -35,6 +43,7 @@
             <br />
           </div>
         </template>
+        
       </div>
     </div>
   </div>
@@ -52,6 +61,8 @@ export default {
     return {
       singleSelectedList: [],
       multiSelectedList: [],
+      singleSearchKey: "",
+      multiSearchKey: "",
       list: [
         {
           name: "End Game",
@@ -77,14 +88,18 @@ export default {
     };
   },
   methods: {
-    inputChangeFn(val) {
-      console.log("value chaned ", val);
+    inputChangeSingleFn(val) {
+      this.singleSearchKey = val;
+    },
+    inputChangeMultiFn(val){
+      this.multiSearchKey = val
     },
     selectedValeChangedFn(values, isSingle) {
       isSingle
         ? (this.singleSelectedList = values)
         : (this.multiSelectedList = values);
-    }
+    },
+   
   }
 };
 </script>
