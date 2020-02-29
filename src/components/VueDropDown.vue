@@ -1,10 +1,8 @@
-<template>
-  <div>
+<template >
+  <div v-click-outside="closeEvent">
     <div
       class="dd-header"
       @click="toggleListFn()"
-      @mouseenter="mouseEnterEventFn()"
-      @mouseleave="mouseLeaveEventFn()"
     >
       <label class="col-12">
         <ul style="display: inline">
@@ -31,7 +29,7 @@
     <template v-if="listOpen">
       <div>
         <ul @mouseenter="mouseEnterEventFn()" @mouseleave="mouseLeaveEventFn()" class="dd-list">
-          <template v-for="(item, index) in list">
+          <template v-for="(item, index) in internalList">
             <li
               :class="selectedClassnameFn(item) ? 'dd-list-item selected' : 'dd-list-item' "
               :key="index"
@@ -45,6 +43,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 export default {
   name: "VueDropDown",
   props: {
@@ -85,12 +84,14 @@ export default {
     return {
       value: "",
       listOpen: false,
-      internalSelectedList: []
+      internalSelectedList: [],
+      internalList: []
     };
   },
   created() {
     this.internalSelectedList = this.selectedList;
     this.value = this.searchKey;
+    this.internalList = this.list;
   },
   watch: {
     selectedList(val) {
@@ -98,12 +99,33 @@ export default {
     },
     searchKey(val) {
       this.val = val;
+      if (val) {
+        this.filterList(val);
+      }
     },
     value(val) {
-      this.$emit("inputChanged", val.toUpperCase());
+      if (val) {
+        this.filterList(val);
+      } else {
+        this.internalList = this.list;
+      }
+      this.$emit("inputChanged", val);
     }
   },
   methods: {
+    nameOfCustomEventToCall(){
+      console.log("hello")
+    },
+    filterList(value) {
+      this.internalList = [];
+      this.internalList = [
+        ...this.list.filter(val => {
+          if (val.name.toUpperCase().includes(value.toUpperCase())) {
+            return val;
+          }
+        })
+      ];
+    },
     toggleListFn() {
       this.listOpen = !this.listOpen;
     },
@@ -116,7 +138,7 @@ export default {
     reveItemFn(index) {
       let tmpArray = this.internalSelectedList.filter((item, i) => i !== index);
       this.internalSelectedList = tmpArray;
-      this.$emit("toggleItem", tmpArray)
+      this.$emit("toggleItem", tmpArray);
     },
     dropDownSelectedItemFn(item) {
       // console.log("dropDownSelectedItemFn called", item);
@@ -132,7 +154,7 @@ export default {
         this.internalSelectedList = totalSelectedItem;
       }
       this.value = "";
-      this.$emit("toggleItem", totalSelectedItem)
+      this.$emit("toggleItem", totalSelectedItem);
     },
     selectedClassnameFn(item) {
       let found = false;
@@ -142,9 +164,28 @@ export default {
           : null;
       });
       return found;
+    },
+    closeEvent: function () {
+      this.listOpen = false
     }
-  }
+  },
 };
+
+Vue.directive('click-outside', {
+  bind: function (el, binding, vnode) {
+    el.clickOutsideEvent = function (event) {
+      // here I check that click was outside the el and his childrens
+      if (!(el == event.target || el.contains(event.target))) {
+        // and if it did, call method provided in attribute value
+        vnode.context[binding.expression](event);
+      }
+    };
+    document.body.addEventListener('click', el.clickOutsideEvent)
+  },
+  unbind: function (el) {
+    document.body.removeEventListener('click', el.clickOutsideEvent)
+  },
+});
 </script>
 
 <style scoped>
