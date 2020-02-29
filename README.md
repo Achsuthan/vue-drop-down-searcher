@@ -7,7 +7,6 @@ Customisable dropdown select for Vue
 
 [![NPM](https://nodei.co/npm/vue-drop-down-searcher.png?mini=true)](https://nodei.co/npm/vue-drop-down-searcher/)
 
-[![Inline docs](http://inch-ci.org/github/achsuthan/vue-drop-down-searcher.svg?branch=master)](http://inch-ci.org/github/achsuthan/vue-drop-down-searcher)
 
 ### &#x1F53A; Whats New
 
