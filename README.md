@@ -5,6 +5,8 @@ Customisable dropdown select for Vue
 <img src="https://badge.fury.io/js/vue-drop-down-searcher.svg" alt="version badge">
 
 
+[![NPM](https://nodei.co/npm/vue-drop-down-searcher.png?mini=true)](https://nodei.co/npm/vue-drop-down-searcher/)
+
 ### &#x1F53A; Whats New
 
 - Search porps added 
