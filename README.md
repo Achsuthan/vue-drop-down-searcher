@@ -2,6 +2,8 @@
 
 Customisable dropdown select for Vue
 
+(https://badge.fury.io/js/vue-drop-down-searcher.svg)
+
 ### &#x1F53A; Whats New
 
 - Search porps added 
