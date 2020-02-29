@@ -2,7 +2,7 @@
 
 Customisable dropdown select for Vue
 
-![alt text] (https://badge.fury.io/js/vue-drop-down-searcher.png)
+<img src="https://badge.fury.io/js/vue-drop-down-searcher.svg" alt="version badge">
 
 
 ### &#x1F53A; Whats New
