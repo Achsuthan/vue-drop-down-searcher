@@ -12,7 +12,7 @@ Customisable dropdown select for Vue
 
 - Search Prop added 
 - Search filter added 
-- InputChanged Call back pros uppercase removed
+- InputChanged Call back props uppercase removed
 - Outside click event to dismiss the dropdown added
 
 ### Features
