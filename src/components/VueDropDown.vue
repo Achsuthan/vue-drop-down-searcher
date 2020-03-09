@@ -1,16 +1,11 @@
 <template >
   <div v-click-outside="closeEvent">
-    <div
-      class="dd-header"
-      @click="toggleListFn()"
-    >
+    <div class="dd-header" @click="toggleListFn()">
       <label class="col-12">
         <ul style="display: inline">
           <template v-for="(item, index) in internalSelectedList">
             <li :key="index" @click="reveItemFn(index)" style="display: inline">
-              <div
-                style="display: inline-block; padding: 2px; border: 1px solid #0074D9; background-color: #0074D9; border-radius : 5px; margin: 5px;cursor: pointer; color: white"
-              >
+              <div :style="tagStyle">
                 {{item[selectedlabelName]}}
                 <span style="paddingLeft: '5px', color: 'white'">X</span>
               </div>
@@ -33,6 +28,7 @@
             <li
               :class="selectedClassnameFn(item) ? 'dd-list-item selected' : 'dd-list-item' "
               :key="index"
+              :style="selectedClassnameFn(item) ? `background-color:${selectedDropdownColor}` : {}"
               @click="dropDownSelectedItemFn(item);"
             >{{item[labelName]}}</li>
           </template>
@@ -43,7 +39,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 export default {
   name: "VueDropDown",
   props: {
@@ -78,6 +74,14 @@ export default {
     searchKey: {
       default: "",
       type: String
+    },
+    tagColor: {
+      default: "#0074D9",
+      type: String
+    },
+    selectedDropdownColor: {
+      default: "#0074D9",
+      type: String
     }
   },
   data() {
@@ -85,13 +89,24 @@ export default {
       value: "",
       listOpen: false,
       internalSelectedList: [],
-      internalList: []
+      internalList: [],
+      tagStyle: {}
     };
   },
   created() {
     this.internalSelectedList = this.selectedList;
     this.value = this.searchKey;
     this.internalList = this.list;
+    this.tagStyle = {
+      display: "inline-block",
+      padding: "2px",
+      border: `1px solid ${this.tagColor}`,
+      "background-color": this.tagColor,
+      "border-radius": "5px",
+      margin: "5px",
+      cursor: "pointer",
+      color: "white"
+    };
   },
   watch: {
     selectedList(val) {
@@ -113,14 +128,14 @@ export default {
     }
   },
   methods: {
-    nameOfCustomEventToCall(){
-      console.log("hello")
+    nameOfCustomEventToCall() {
+      console.log("hello");
     },
     filterList(value) {
       this.internalList = [];
       this.internalList = [
         ...this.list.filter(val => {
-          if (val.name.toUpperCase().includes(value.toUpperCase())) {
+          if (val[this.labelName].toUpperCase().includes(value.toUpperCase())) {
             return val;
           }
         })
@@ -165,26 +180,26 @@ export default {
       });
       return found;
     },
-    closeEvent: function () {
-      this.listOpen = false
+    closeEvent: function() {
+      this.listOpen = false;
     }
-  },
+  }
 };
 
-Vue.directive('click-outside', {
-  bind: function (el, binding, vnode) {
-    el.clickOutsideEvent = function (event) {
+Vue.directive("click-outside", {
+  bind: function(el, binding, vnode) {
+    el.clickOutsideEvent = function(event) {
       // here I check that click was outside the el and his childrens
       if (!(el == event.target || el.contains(event.target))) {
         // and if it did, call method provided in attribute value
         vnode.context[binding.expression](event);
       }
     };
-    document.body.addEventListener('click', el.clickOutsideEvent)
+    document.body.addEventListener("click", el.clickOutsideEvent);
   },
-  unbind: function (el) {
-    document.body.removeEventListener('click', el.clickOutsideEvent)
-  },
+  unbind: function(el) {
+    document.body.removeEventListener("click", el.clickOutsideEvent);
+  }
 });
 </script>
 
